@@ -1,4 +1,4 @@
-# Example of cmdtab Subcommand
+# Go Tab Complete Command: `cmdtab config`
 
 See <https://github.com/rwxrob/cmdtab> for details.
 
