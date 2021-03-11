@@ -32,6 +32,8 @@ func init() {
 			return err
 		}
 		switch len(args) {
+		case 0:
+			config.PrettyPrint()
 		case 1:
 			switch args[0] {
 			case "file":
