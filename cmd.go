@@ -37,19 +37,19 @@ func init() {
 		case 1:
 			switch args[0] {
 			case "file":
-				fmt.Println(config.Path())
+				cmdtab.SmartPrintln(config.Path())
 			case "dir":
-				fmt.Println(config.Dir)
+				cmdtab.SmartPrintln(config.Dir)
 			case "dump":
 				fmt.Println(config)
 			case "print":
 				config.PrettyPrint()
 			case "saved":
-				fmt.Println(config.Saved)
+				cmdtab.SmartPrintln(config.Saved)
 			case "updated":
-				fmt.Println(config.Updated)
+				cmdtab.SmartPrintln(config.Updated)
 			default:
-				fmt.Println(config.Get(args[0]))
+				cmdtab.SmartPrintln(config.Get(args[0]))
 			}
 		case 2:
 			return config.SetSave(args[0], args[1])
