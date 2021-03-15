@@ -26,8 +26,11 @@ func init() {
 		strings. This improves efficiency and avoids type inference issues. `
 
 	x.Method = func(args []string) error {
-		config := conf.New()
-		err := config.Load()
+		config, err := conf.New()
+		if err != nil {
+			return err
+		}
+		err = config.Load()
 		if err != nil {
 			return err
 		}
