@@ -1,14 +1,13 @@
 package cmd
 
 import (
-	"fmt"
-
-	"github.com/rwxrob/cmdtab"
+	"github.com/rwxrob/cmdbox"
+	"github.com/rwxrob/cmdbox/fmt"
 	"github.com/rwxrob/conf-go"
 )
 
 func init() {
-	x := cmdtab.New("config", "file", "print", "dir", "dump", "saved", "updated")
+	x := cmdbox.New("config", "file", "print", "dir", "dump", "saved", "updated")
 	x.Version = `v1.0.0`
 	x.Summary = `manage local configuration settings`
 	x.Usage = `(file|dir|dump|print|saved|updated|<name> [<value>])`
@@ -40,19 +39,18 @@ func init() {
 		case 1:
 			switch args[0] {
 			case "file":
-				cmdtab.SmartPrintln(config.Path())
+				fmt.SmartPrintln(config.Path())
 			case "dir":
-				cmdtab.SmartPrintln(config.Dir)
+				fmt.SmartPrintln(config.Dir)
 			case "dump":
 				fmt.Println(config)
-			case "print":
-				config.PrettyPrint()
+
 			case "saved":
-				cmdtab.SmartPrintln(config.Saved)
+				fmt.SmartPrintln(config.Saved)
 			case "updated":
-				cmdtab.SmartPrintln(config.Updated)
+				fmt.SmartPrintln(config.Updated)
 			default:
-				cmdtab.SmartPrintln(config.Get(args[0]))
+				fmt.SmartPrintln(config.Get(args[0]))
 			}
 		case 2:
 			return config.SetSave(args[0], args[1])

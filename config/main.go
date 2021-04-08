@@ -1,10 +1,10 @@
 package main
 
 import (
-	"github.com/rwxrob/cmdtab"
-	_ "github.com/rwxrob/cmdtab-config"
+	"github.com/rwxrob/cmdbox"
+	_ "github.com/rwxrob/cmdbox-config"
 )
 
 func main() {
-	cmdtab.Execute("config")
+	cmdbox.Execute("config")
 }
