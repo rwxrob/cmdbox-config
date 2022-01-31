@@ -8,7 +8,7 @@ import (
 )
 
 func init() {
-	x := cmdbox.New("config", "file", "print", "dir", "dump", "saved", "updated")
+	x := cmdbox.Add("config", "file", "print", "dir", "dump", "saved", "updated")
 	x.Version = `v1.0.1`
 	x.Summary = `manage local configuration settings`
 	x.Usage = `(file|dir|dump|print|saved|updated|<name> [<value>])`
@@ -26,35 +26,34 @@ func init() {
 		strings. This improves efficiency and avoids type inference issues. `
 
 	x.Method = func(args []string) error {
-		config, err := conf.New()
-		if err != nil {
-			return err
-		}
-		err = config.Load()
+		var err error
+		config := conf.NewMap()
+		err = config.Read()
 		if err != nil {
 			return err
 		}
 		switch len(args) {
 		case 0:
-			config.PrettyPrint()
+			config.Print()
 		case 1:
 			switch args[0] {
+			case "name":
+				fmt.Println(config.Name())
 			case "file":
+				fmt.Println(config.File())
+			case "path":
 				fmt.Println(config.Path())
-			case "dir":
-				fmt.Println(config.Dir)
+			case "home":
+				fmt.Println(config.Home())
 			case "dump":
 				fmt.Println(config)
-
-			case "saved":
-				fmt.Println(config.Saved)
-			case "updated":
-				fmt.Println(config.Updated)
+			case "edit":
+				return config.Edit() // does not return
 			default:
 				fmt.Println(config.Get(args[0]))
 			}
 		case 2:
-			return config.SetSave(args[0], args[1])
+			return config.Set(args[0], args[1])
 		default:
 			return x.UsageError()
 		}
